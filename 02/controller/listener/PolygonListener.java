@@ -53,17 +53,27 @@ public class PolygonListener extends MouseInputAdapter {//Siehe Dokumentation vo
 		else{
 			Point a = new Point(e.getX(), e.getY());
 			Line l = new Line(other, a);
-			if(a.x>=(start.x-abweichung) && a.x<=(a.x+abweichung)){		//Sofern ein n‰chste Punkt in der 5*5 K‰stchen n‰he sich befinded
-				if(a.y>=(start.y-abweichung) && a.y<=(start.y+abweichung)){	//in x als auch in y richtung
-					l = new Line(other, start);			//Zeichne stattdessen die Linie zum Startpunkt zurr¸ck
+			if(a.x>=(start.x-abweichung)){		//Sofern ein n√§chste Punkt in der 5*5 K√§stchen n√§he sich befinded
+				//in x als auch in y richtung
+				if(a.x<=(start.x+abweichung)){
+					if(a.y>=(start.y-abweichung)){
+						if(a.y<=(start.y+abweichung)){	
+							l = new Line(other, start);			//Zeichne stattdessen die Linie zum Startpunkt zurr√ºck
+						}
+					}
 				}
 			}
 			delegate.clearTemporaryDrawableObject();
 			delegate.processDrawableObject(l);		//Zeichne die Linie
 			other = a;								//Fange neue Linie ab "a" an
-			if(a.x>=(start.x-abweichung) && a.x<=(a.x+abweichung)){		//Waren wir aber in Startpunkt n‰he
-				if(a.y>=(start.y-abweichung) && a.y<=(start.y+abweichung)){
-					other = null;					//So beende das Polygon
+			if(a.x>=(start.x-abweichung)){		//Sofern ein n√§chste Punkt in der 5*5 K√§stchen n√§he sich befinded
+				//in x als auch in y richtung
+				if(a.x<=(start.x+abweichung)){
+					if(a.y>=(start.y-abweichung)){
+						if(a.y<=(start.y+abweichung)){	
+							other = null;			//Zeichne stattdessen die Linie zum Startpunkt zurr√ºck
+						}
+					}
 				}
 			}
 		}
